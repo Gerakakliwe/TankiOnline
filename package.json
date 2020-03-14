@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
-  "author": "",
+  "author": "Bogdan Bondarenko",
   "license": "ISC",
   "dependencies": {
     "nodemon": "^1.18.4",
