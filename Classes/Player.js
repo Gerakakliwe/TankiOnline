@@ -34,7 +34,7 @@ module.exports = class Player {
                 this.respawnTicker = new Number(0);
                 this.respawnTime = new Number(0);
                 this.health = new Number(100);
-                this.position = new Vector2(-8, 3);
+                this.position = new Vector2(getRandomIntInclusive(-8,8), getRandomIntInclusive(-3,3));
 
                 return true;
             }
@@ -57,3 +57,8 @@ module.exports = class Player {
         return this.isDead;
     }
 }
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
+  }
