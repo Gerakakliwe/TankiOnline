@@ -1,0 +1,10 @@
+diff a/Classes/Lobbies/GameLobby.js b/Classes/Lobbies/GameLobby.js	(rejected hunks)
+@@ -151,7 +151,7 @@
+                 if(bullet.activator != player.id) {
+                     let distance = bullet.position.Distance(player.position);
+ 
+-                    if(distance < 1) {
++                    if(distance < 0.1) {
+                         let isDead = player.dealDamage(50);
+                         if(isDead) {
+                             console.log('Player with id: ' + player.id + ' has died');

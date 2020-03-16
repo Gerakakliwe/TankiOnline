@@ -128,8 +128,7 @@ module.exports = class GameLobbby extends LobbyBase {
                 x: bullet.direction.x,
                 y: bullet.direction.y
             },
-            speed: bullet.speed,
-            health: player.health
+            speed: bullet.speed
         }
 
         connection.socket.emit('serverSpawn', returnData);
@@ -152,7 +151,7 @@ module.exports = class GameLobbby extends LobbyBase {
                 if(bullet.activator != player.id) {
                     let distance = bullet.position.Distance(player.position);
 
-                    if(distance < 2.5) {
+                    if(distance < 0.65) {
                         let isDead = player.dealDamage(50);
                         if(isDead) {
                             console.log('Player with id: ' + player.id + ' has died');
