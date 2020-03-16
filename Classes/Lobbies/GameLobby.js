@@ -151,13 +151,8 @@ module.exports = class GameLobbby extends LobbyBase {
                 if(bullet.activator != player.id) {
                     let distance = bullet.position.Distance(player.position);
 
-<<<<<<< HEAD
                     if(distance < 2.5) {
                         let isDead = player.dealDamage(25);
-=======
-                    if(distance < 0.65) {
-                        let isDead = player.dealDamage(50);
->>>>>>> 6168e63caac77a6a6c7d892941eb4a7f0755b5d7
                         if(isDead) {
                             console.log('Player with id: ' + player.id + ' has died');
                             let returnData = {
