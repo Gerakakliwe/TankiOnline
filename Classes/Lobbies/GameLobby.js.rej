@@ -1,0 +1,11 @@
+diff a/Classes/Lobbies/GameLobby.js b/Classes/Lobbies/GameLobby.js	(rejected hunks)
+@@ -128,8 +128,7 @@
+                 x: bullet.direction.x,
+                 y: bullet.direction.y
+             },
+-            speed: bullet.speed,
+-            health: player.health
++            speed: bullet.speed
+         }
+ 
+         connection.socket.emit('serverSpawn', returnData);
