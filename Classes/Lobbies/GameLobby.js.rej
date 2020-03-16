@@ -1,4 +1,5 @@
 diff a/Classes/Lobbies/GameLobby.js b/Classes/Lobbies/GameLobby.js	(rejected hunks)
+<<<<<<< HEAD
 @@ -128,8 +128,7 @@
                  x: bullet.direction.x,
                  y: bullet.direction.y
@@ -9,3 +10,14 @@ diff a/Classes/Lobbies/GameLobby.js b/Classes/Lobbies/GameLobby.js	(rejected hun
          }
  
          connection.socket.emit('serverSpawn', returnData);
+=======
+@@ -151,7 +151,7 @@
+                 if(bullet.activator != player.id) {
+                     let distance = bullet.position.Distance(player.position);
+ 
+-                    if(distance < 1) {
++                    if(distance < 0.1) {
+                         let isDead = player.dealDamage(50);
+                         if(isDead) {
+                             console.log('Player with id: ' + player.id + ' has died');
+>>>>>>> 6168e63caac77a6a6c7d892941eb4a7f0755b5d7
