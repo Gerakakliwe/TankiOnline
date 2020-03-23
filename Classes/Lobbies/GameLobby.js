@@ -31,10 +31,13 @@ module.exports = class GameLobbby extends LobbyBase {
 
     onEnterLobby(connection = Connection) {
         let lobby = this;
+        let socket = connection.socket;
 
         super.onEnterLobby(connection);
 
         lobby.addPlayer(connection);
+
+        socket.emit('loadGame');
 
         //Handle spawning any server spawned objects here
         //Example: loot, perhaps flying bullets etc
@@ -116,15 +119,18 @@ module.exports = class GameLobbby extends LobbyBase {
 
         lobby.bullets.push(bullet);
 
-        var returnData = {
+        var returnData = 
+        {
             name: bullet.name,
             id: bullet.id,
             activator: bullet.activator,
-            position: {
+            position: 
+            {
                 x: bullet.position.x,
                 y: bullet.position.y
             },
-            direction: {
+            direction: 
+            {
                 x: bullet.direction.x,
                 y: bullet.direction.y
             },
@@ -148,19 +154,39 @@ module.exports = class GameLobbby extends LobbyBase {
             lobby.connections.forEach(c => {
                 let player = c.player;
 
-                if(bullet.activator != player.id) {
+                if(bullet.activator != player.id) 
+                {
                     let distance = bullet.position.Distance(player.position);
 
                     if(distance < 1.5) {
                         let isDead = player.dealDamage(25);
-                        if(isDead) {
-                            console.log('Player with id: ' + player.id + ' has died');
-                            let returnData = {
+                        if(isDead) 
+                        {
+                            if(player.lives <= 1)
+                            {
+                            console.log('Player with id: ' + player.id + ' has LOST');
+                            let returnData = 
+                            {
                                 id: player.id,
+                                lives: player.lives
                             }
-                            c.socket.emit('playerDied', returnData);
-                            c.socket.broadcast.to(lobby.id).emit('playerDied', returnData);
-                        } else {
+                            c.socket.emit('playerLost', returnData);
+                            c.socket.broadcast.to(lobby.id).emit('playerLost', returnData);
+                            }
+                            else
+                            {
+                                player.lives -= 1;    
+                                console.log('Player with id: ' + player.id + ' has died,' + player.lives + ' lives left');
+                                let returnData = {
+                                    id: player.id,
+                                    lives: player.lives
+                                }
+                                c.socket.emit('playerDied', returnData);
+                                c.socket.broadcast.to(lobby.id).emit('playerDied', returnData);
+                            }
+                        } 
+                        else 
+                        {
                             console.log('Player with id: ' + player.id + ' has (' + player.health + ') health left');
                             let returnData = {
                                 id: player.id,
