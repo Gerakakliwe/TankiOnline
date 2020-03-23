@@ -87,7 +87,7 @@ module.exports = class Server {
         //All game lobbies full or we have never created one
         if(!lobbyFound) {
             console.log('Making a new game lobby');
-            let gamelobby = new GameLobby(gameLobbies.length + 1, new GameLobbySettings('FFA', 2));
+            let gamelobby = new GameLobby(gameLobbies.length + 1, new GameLobbySettings('FFA', 4));
             server.lobbys.push(gamelobby);
             server.onSwitchLobby(connection, gamelobby.id);
         }
