@@ -105,7 +105,34 @@ module.exports = class GameLobbby extends LobbyBase {
             }
         });
     }
+/*
+    checkForWinner() {
+        let lobby = this;
+        let connections = lobby.connections;
+                    
+        let currentPlayerCount = lobby.connections.length;
 
+        connections.forEach(connection => 
+            {
+            let player = connection.player;
+                let socket = connection.socket;
+                let returnData = 
+                {
+                id: player.id,
+                }
+                if(currentPlayerCount = 1) 
+                {
+                    console.log('Player with id: ' + player.id + ' has WON');
+                    socket.emit('playerWon', returnData);
+                    socket.broadcast.to(lobby.id).emit('playerWon', returnData);
+                }
+                else
+                {
+                    console.log('There is ' + currentPlayerCount + ' more players, who would win?');
+                }
+        });
+    }
+*/
     onFireBullet(connection = Connection, data) {
         let lobby = this;
 
@@ -164,14 +191,14 @@ module.exports = class GameLobbby extends LobbyBase {
                         {
                             if(player.lives <= 1)
                             {
-                            console.log('Player with id: ' + player.id + ' has LOST');
+                            console.log('GAMEOVER');
                             let returnData = 
                             {
                                 id: player.id,
                                 lives: player.lives
                             }
-                            c.socket.emit('playerLost', returnData);
-                            c.socket.broadcast.to(lobby.id).emit('playerLost', returnData);
+                            c.socket.emit('gameOver', returnData);
+                            c.socket.broadcast.to(lobby.id).emit('gameOver', returnData);
                             }
                             else
                             {
@@ -205,6 +232,19 @@ module.exports = class GameLobbby extends LobbyBase {
             }
         });        
     }
+
+    
+
+    /*                        
+    let currentPlayerCount = lobby.connections.length;
+
+    if(currentPlayerCount = 1) 
+    {
+        return false;
+    }
+    return true;
+    */
+
 
     despawnBullet(bullet = Bullet) {
         let lobby = this;
